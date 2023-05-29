@@ -4,7 +4,7 @@ from flask_restx import Api
 from config import Config
 from app.setup_db import db
 from app.views.note import note_ns
-#test
+#test2
 
 def create_app(config_object):
     app = Flask(__name__)
