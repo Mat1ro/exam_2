@@ -2,25 +2,25 @@ version: "3.9"
 
 services:
   api:
-    image:
-      mat1ro/exam_2
+    build:
+      context: .
     ports:
-      - 80:80
+      - "80:80"
     volumes:
-      - ./docker_config.py:/code/config.py
+      - ./docker_config.py:/code/default_config.py
     depends_on:
       pg:
         condition: service_healthy
   pg:
     image: postgres:latest
     environment:
-      POSTGRES_USER: flask_app
-      POSTGRES_PASSWORD: flask_app_password
-      POSTGRES_DB: flask_app
+      POSTGRES_USER: exam
+      POSTGRES_PASSWORD: exam_pass
+      POSTGRES_DB: exam
     volumes:
       - ./pg_data:/var/lib/postgresql/data
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      test: [ "CMD-SHELL", "pg_isready -U postgres" ]
       interval: 5s
       timeout: 5s
       retries: 5
